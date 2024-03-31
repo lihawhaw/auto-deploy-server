@@ -1,4 +1,4 @@
-import { Controller, Get, Query, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { DeployService } from './deploy.service';
 import {
   ApiResult,
@@ -25,7 +25,7 @@ export class DeployController {
     @Query('git') git: string,
   ): ApiResult<string> {
     if (!type || !git) {
-      throw new BadRequestException('部署参数不完整');
+      return errorResult('部署参数不完整');
     }
 
     if (type !== 'node' && type !== 'static') {
