@@ -145,7 +145,7 @@ async function deleteServices(pm2Options: any[]): Promise<void> {
   const promises = pm2Options.map((app) => {
     return new Promise<void>((resolve, reject) => {
       pm2.delete(app.name, (err: any) => {
-        if (err && err.message !== 'process name not found') {
+        if (err && err.message.indexOf('not found') === -1) {
           reject(err);
         } else {
           resolve();
